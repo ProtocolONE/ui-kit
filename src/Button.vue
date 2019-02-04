@@ -97,7 +97,6 @@ $button-font-style: Roboto;
 
 .base-button {
   &._orange {
-
     &._plus {
       float: left;
       padding: 8px 12px 5px 12px;
