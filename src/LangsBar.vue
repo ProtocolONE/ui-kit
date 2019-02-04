@@ -13,10 +13,9 @@
 </template>
 
 <script type="ts">
-  import Vue from 'vue'
   import LangButton from './LangButton'
 
-  export default Vue.extend({
+  export default {
     components: {LangButton},
     props: {
       list: {
@@ -38,7 +37,7 @@
         this.$emit('change', value);
       }
     }
-  })
+  }
 </script>
 
 <style scoped lang="scss">
