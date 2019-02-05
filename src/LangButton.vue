@@ -1,59 +1,68 @@
 <template>
-<button
-  :class="buttonClasses"
-  @click="$emit('click')"
->
+<button :class="buttonClasses">
   {{ text.toUpperCase() }}
 </button>
 </template>
 
-<script type="ts">
+<script>
 export default {
-  name: 'LangButton',
   props: {
-    text: {
-      type: String,
-      require: true,
-    },
-    select: {
-      type: Boolean,
-      default: false,
-    },
     filled: {
       type: Boolean,
       default: false,
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
+    text: {
+      type: String,
+      require: true,
+    },
   },
-  data: () => ({}),
   computed: {
     buttonClasses() {
-      return [this.selected ? '_selected' : '', this.filled ? '_filled' : ''];
+      return ['lang-button', this.selected ? '_selected' : '', this.filled ? '_filled' : ''];
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-button {
-  background: white;
-  border: 1.1px solid #979797;
-  border-radius: 3px;
-  color: #777777;
-  margin-right: 7px;
-  margin-top: 6px;
+.lang-button {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #b1b1b1;
+  border-radius: 2px;
   font-size: 14px;
-  padding: 2px 11px 0px 11px;
+  padding: 0 24px 0 8px;
   cursor: pointer;
-  &.filled {
-    border-color: #ea7e00;
+  outline: none;
+  height: 24px;
+  line-height: 24px;
+
+  &:after {
+    content: '';
+    border-radius: 50%;
+    background-color: #b1b1b1;
+    width: 6px;
+    height: 6px;
+    top: 8px;
+    right: 8px;
+    position: absolute;
   }
-  &.select {
-    border-color: #5ac1f0;
-    color: #5ac1f0;
+
+  &:hover {
+    color: #2f6ecc;
   }
-  &:active,
-  &:focus {
-    outline: none;
+
+  &._filled {
+    &:after {
+      background-color: #54d779;
+    }
+  }
+  &._selected {
+    border-color: #2f6ecc;
   }
 }
 </style>
