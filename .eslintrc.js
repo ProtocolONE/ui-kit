@@ -94,7 +94,7 @@ module.exports = {
         enforceForRenamedProperties: false,
       },
     ],
-
+    'vue/require-default-prop': 'off',
     'vue/html-indent': [
       'error',
       2,

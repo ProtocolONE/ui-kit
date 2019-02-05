@@ -1,46 +1,61 @@
-
 <template>
 <div class="langs-bar">
   <LangButton
-    v-for="(val) in list"
-    :key="val"
-    :filled="!!occupied[val]"
-    :select="val === value"
-    :text="val"
-    @click="onSelect(val)"
+    v-for="lang in list"
+    :key="lang"
+    class="lang"
+    :filled="filledLang(lang)"
+    :selected="lang === currentLang"
+    :text="lang"
+    @click.native="onSelect(lang)"
   />
 </div>
 </template>
 
-<script type="ts">
+<script>
+import includes from 'lodash-es/includes';
 import LangButton from './LangButton';
 
 export default {
-  name: 'LangsBar',
   components: { LangButton },
   props: {
     list: {
       type: Array,
       default: () => ['en', 'ru', 'fr', 'ptbr'],
     },
-    occupied: {
-      type: Object,
-      default: () => {},
+    filledList: {
+      type: Array,
+      default: () => [],
     },
-    value: {
+    selectedLang: {
       type: String,
       default: 'en',
     },
   },
+  data() {
+    return {
+      currentLang: this.selectedLang,
+    };
+  },
+  watch: {
+    selectedLang(lang) {
+      this.currentLang = lang;
+    },
+  },
   methods: {
-    onSelect(value) {
-      this.$emit('change', value);
+    filledLang(lang) {
+      return includes(this.filledList, lang);
+    },
+    onSelect(lang) {
+      this.currentLang = lang;
+      this.$emit('change', lang);
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.langs-bar {
+.lang + .lang {
+  margin-left: 4px;
 }
 </style>
