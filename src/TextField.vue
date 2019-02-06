@@ -4,6 +4,8 @@
     v-model="inputValue"
     v-bind="{ type, required, disabled }"
     :class="inputClasses"
+    @blur="$emit('blur')"
+    @focus="$emit('focus')"
     @input="$emit('input', inputValue)"
   >
   <label

@@ -84,7 +84,7 @@ $button-font-color: #fff;
 $disabled-button-color: #e1e1e1;
 
 $primary-button-size: 14px;
-$button-font-style: Roboto;
+$button-font-style: Loto;
 
 @mixin base-button($background, $minWidth: auto, $color: $button-font-color) {
   background-color: $background;

@@ -4,7 +4,8 @@ import Dropdown from './src/Dropdown.vue';
 import LangsBar from './src/LangsBar.vue';
 import SwitchBox from './src/SwitchBox.vue';
 import TextField from './src/TextField.vue';
+import TagInput from './src/TagInput.vue';
 
 export {
-  Button, Checkbox, Dropdown, SwitchBox, TextField, LangsBar,
+  Button, Checkbox, Dropdown, LangsBar, SwitchBox, TextField, TagInput
 };
