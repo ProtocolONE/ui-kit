@@ -23,14 +23,16 @@
 </template>
 
 <script>
-import concat from 'lodash-es/concat';
-import without from 'lodash-es/without';
-import includes from 'lodash-es/includes';
+import { directive as clickaway } from 'vue-clickaway';
+import { concat, without, includes } from 'lodash-es';
 import TagBox from './TagBox.vue';
 import TagList from './TagList.vue';
 import TextField from './TextField.vue';
 
 export default {
+  directives: {
+    clickaway,
+  },
   components: { TagBox, TagList, TextField },
   props: {
     label: {
@@ -61,6 +63,14 @@ export default {
       return without(this.localTags, ...this.localSelectedTags);
     },
   },
+  watch: {
+    selectedTags(val) {
+      this.localSelectedTags = value;
+    },
+    tags(val) {
+      this.localTags = value;
+    },
+  },
   methods: {
     blur() {
       this.fieldFocused = false;
@@ -76,14 +86,6 @@ export default {
     },
     search(value) {
       this.localTags = this.searchedTags.filter(tag => includes(tag, value));
-    },
-  },
-  watch: {
-    selectedTags(val) {
-      this.localSelectedTags = value;
-    },
-    tags(val) {
-      this.localTags = value;
     },
   },
 };
