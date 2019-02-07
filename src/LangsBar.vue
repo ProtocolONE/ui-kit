@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import includes from 'lodash-es/includes';
+import { includes } from 'lodash-es';
 import LangButton from './LangButton';
 
 export default {

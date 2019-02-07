@@ -46,7 +46,12 @@
 </template>
 
 <script>
+import { directive as clickaway } from 'vue-clickaway';
+
 export default {
+  directives: {
+    clickaway,
+  },
   props: {
     additionalInfo: {
       default: '',

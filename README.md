@@ -4,20 +4,20 @@ Collection of ui components
 ## Development
 
 ### Link ui-kit for development
-In ui-kit folder:
+In the ui-kit folder:
 ```
 yarn link
 ```
 
 In your project folder:
 ```
-yarn link ui-kit
+yarn link @protocol-one/ui-kit
 ```
 
 ### Usage
 Get components as:
 ```
-import { Button, SwitchBox } from 'ui-kit';
+import { Button, SwitchBox } from '@protocol-one/ui-kit';
 ```
 
 ### Lints and fixes files
