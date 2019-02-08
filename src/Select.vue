@@ -170,8 +170,6 @@ $hover-option-color: #deebfa;
 $primary-input-size: 16px;
 $secondary-input-size: 14px;
 
-$input-font-style: Lato;
-
 .select-field {
   background-color: $input-background-color;
   border-bottom: 1px solid #e5e5e5;
@@ -181,7 +179,6 @@ $input-font-style: Lato;
   display: inline-block;
   vertical-align: top;
   font-size: $primary-input-size;
-  font-style: $input-font-style;
   height: 56px;
   padding: 24px 0 0;
   position: relative;
@@ -285,7 +282,11 @@ $input-font-style: Lato;
   width: 100%;
 }
 .overlay {
-  background-image: linear-gradient(0deg, $input-background-color 0%, rgba($input-background-color, 0) 100%);
+  background-image: linear-gradient(
+    0deg,
+    $input-background-color 0%,
+    rgba($input-background-color, 0) 100%
+  );
   bottom: 0;
   pointer-events: none;
   height: 40px;
