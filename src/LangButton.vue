@@ -1,6 +1,7 @@
 <template>
 <button :class="buttonClasses">
-  {{ text.toUpperCase() }}
+  {{ text }}
+  <slot/>
 </button>
 </template>
 
@@ -17,7 +18,6 @@ export default {
     },
     text: {
       type: String,
-      required: true,
     },
   },
   computed: {
@@ -40,6 +40,7 @@ export default {
   outline: none;
   height: 24px;
   line-height: 24px;
+  text-transform: uppercase;
 
   &:after {
     content: '';
