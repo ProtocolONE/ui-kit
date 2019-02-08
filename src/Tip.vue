@@ -24,12 +24,17 @@ export default {
         return includes(['white'], value);
       },
     },
+    visible: {
+      default: false,
+      type: Boolean,
+    },
   },
   computed: {
     tipClasses() {
       return [
         'simple-tip',
         `_${this.color}`,
+        this.visible ? '_show' : '',
       ];
     },
   },
@@ -38,35 +43,40 @@ export default {
 
 <style scoped lang="scss">
 @mixin simple-tip($background: #fff, $padding: 32px) {
-  position: relative;
+  right: 0;
+  top: 50%;
+  transform: translate(calc(100% + 16px), -50%);
+  position: absolute;
   border-radius: 2px;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
   padding: $padding;
   background-color: $background;
-
-  &:before,
-  &:after {
-    position: absolute;
-    content: '';
-    width: 0;
-    height: 0;
-    left: -6px;
-    top: 40px;
-    border: 6px solid $background;
-    border-color: transparent transparent $background $background;
-    transform-origin: center;
-    transform: rotate(45deg);
-  }
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
 
   &:before {
-    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    content: '\25C0';
+    left: -10px;
+    top: calc(50% - 8px);
+    text-shadow: -4px 0px 4px rgba(0, 0, 0, 0.05);
     z-index: -1;
+    transform: scaleY(1.6);
+    font-size: 12px;
+    color: $background;
   }
 }
 
 .simple-tip {
+  @include simple-tip();
+
   &._white {
-    @include simple-tip();
+    @include simple-tip($background: #fff);
+  }
+  &._show {
+    opacity: 1;
+    pointer-events: initial;
   }
 }
 
