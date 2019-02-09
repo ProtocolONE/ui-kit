@@ -180,7 +180,7 @@ $secondary-input-size: 14px;
   vertical-align: top;
   font-size: $primary-input-size;
   height: 56px;
-  padding: 24px 0 0;
+  padding: 24px 0;
   position: relative;
   transition: border-color 0.2s ease-out;
   width: 100%;

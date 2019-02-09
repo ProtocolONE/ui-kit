@@ -114,7 +114,7 @@ $secondary-input-size: 14px;
 
 .text-field {
   display: inline-block;
-  padding: 24px 0 0;
+  padding: 24px 0;
   position: relative;
   width: 100%;
 }
