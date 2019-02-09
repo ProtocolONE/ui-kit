@@ -112,11 +112,8 @@ $error-input-color: #ff6f6f;
 $primary-input-size: 16px;
 $secondary-input-size: 14px;
 
-$input-font-style: Lato;
-
 .text-field {
   display: inline-block;
-  font-style: $input-font-style;
   padding: 24px 0;
   position: relative;
   width: 100%;

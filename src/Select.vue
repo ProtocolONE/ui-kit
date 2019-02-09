@@ -1,7 +1,7 @@
 <template>
 <div
   v-clickaway="blur"
-  :class="inputClasses"
+  :class="selectClasses"
   @click="focused ? blur() : focus()"
 >
   <span
@@ -19,23 +19,27 @@
     {{ additionalInfo }}
   </span>
   <span class="selected">
-    {{ dropdownValue }}
+    {{ selectedLabel }}
   </span>
   <div class="box">
     <div class="options">
       <label
-        v-for="(option, index) in options"
-        :key="index"
-        :class="['option', option === dropdownValue ? '_current' : '']"
+        v-for="option in optionsView"
+        :key="option.value"
+        class="option"
+        :class="{
+          '_empty': !option.value,
+          '_current': option === option.value
+        }"
       >
-        {{ option }}
+        {{ option.label }}
         <input
-          v-model="dropdownValue"
+          v-model="selectValue"
           class="input"
-          name="dropdownValue"
+          name="selectValue"
           type="radio"
           :required="required"
-          :value="option"
+          :value="option.value"
           @input="emitChange"
         >
       </label>
@@ -47,6 +51,7 @@
 
 <script>
 import { directive as clickaway } from 'vue-clickaway';
+import { find } from 'lodash-es';
 
 export default {
   directives: {
@@ -68,6 +73,15 @@ export default {
     options: {
       default: () => [],
       type: Array,
+      validator(value) {
+        if (!value.length) {
+          return true;
+        }
+        if (value[0].label !== undefined && value[0].value !== undefined) {
+          return true;
+        }
+        return false;
+      },
     },
     required: {
       default: false,
@@ -75,32 +89,59 @@ export default {
     },
     value: {
       default: '',
+      type: [String, Number],
+    },
+    hasEmptyValue: {
+      default: false,
+      type: Boolean,
+    },
+    placeholder: {
+      default: 'Not selected',
       type: String,
     },
   },
   data() {
     return {
-      dropdownValue: this.value,
+      selectValue: this.value,
       focused: false,
     };
   },
   computed: {
     /**
-     * Classes for dropdown
+     * Classes for select
      * @return {Array<string>}
      */
-    inputClasses() {
+    selectClasses() {
       return [
-        'dropdown-field',
+        'select-field',
         this.focused ? '_focused' : '',
-        !this.dropdownValue ? '_empty' : '',
+        !this.selectValue ? '_empty' : '',
         this.disabled ? '_disabled' : '',
       ];
+    },
+
+    selectedLabel() {
+      const selectedItem = find(this.options, { value: this.selectValue });
+      return selectedItem ? selectedItem.label : this.placeholder;
+    },
+
+    optionsView() {
+      if (this.hasEmptyValue) {
+        return [
+          {
+            label: this.placeholder,
+            value: '',
+          },
+          ...this.options,
+        ];
+      }
+
+      return this.options;
     },
   },
   watch: {
     value(val) {
-      this.dropdownValue = val;
+      this.selectValue = val;
     },
   },
   methods: {
@@ -129,22 +170,17 @@ $hover-option-color: #deebfa;
 $primary-input-size: 16px;
 $secondary-input-size: 14px;
 
-$input-font-style: Lato;
-
-.dropdown-field {
+.select-field {
   background-color: $input-background-color;
-  border-style: solid;
-  border-width: 0;
-  border-bottom-width: 1px;
-  border-color: #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
   color: $primary-input-color;
   cursor: pointer;
   display: inline-block;
+  vertical-align: top;
   font-size: $primary-input-size;
-  font-style: $input-font-style;
   height: 56px;
-  padding: 24px 0 0;
+  padding: 24px 0;
   position: relative;
   transition: border-color 0.2s ease-out;
   width: 100%;
@@ -213,18 +249,22 @@ $input-font-style: Lato;
 }
 .selected {
   display: block;
-  width: 100px;
   height: 32px;
   line-height: 32px;
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.2s ease-out;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: calc(100% - 12px);
 }
 .box {
   background-color: $input-background-color;
   box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
   left: -16px;
   position: absolute;
+  z-index: 10;
   text-overflow: ellipsis;
   top: 56px;
   transform: scaleY(0);
@@ -242,7 +282,11 @@ $input-font-style: Lato;
   width: 100%;
 }
 .overlay {
-  background-image: linear-gradient(0deg, $input-background-color 0%, rgba($input-background-color, 0) 100%);
+  background-image: linear-gradient(
+    0deg,
+    $input-background-color 0%,
+    rgba($input-background-color, 0) 100%
+  );
   bottom: 0;
   pointer-events: none;
   height: 40px;
@@ -262,6 +306,10 @@ $input-font-style: Lato;
   &:hover,
   &._current {
     background-color: $hover-option-color;
+  }
+
+  &._empty {
+    color: $secondary-input-color;
   }
 }
 input {

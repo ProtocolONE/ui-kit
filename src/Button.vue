@@ -5,6 +5,7 @@
   @click="emitClick"
 >
   {{ text }}
+  <slot/>
 </button>
 </template>
 
