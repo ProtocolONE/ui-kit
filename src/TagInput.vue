@@ -65,10 +65,10 @@ export default {
   },
   watch: {
     selectedTags(val) {
-      this.localSelectedTags = value;
+      this.localSelectedTags = val;
     },
     tags(val) {
-      this.localTags = value;
+      this.localTags = val;
     },
   },
   methods: {
@@ -80,11 +80,11 @@ export default {
     },
     addTag(tag) {
       this.localSelectedTags = concat(this.localSelectedTags, tag);
-      this.$emit('change', localSelectedTags);
+      this.$emit('change', this.localSelectedTags);
     },
     removeTag(tag) {
       this.localSelectedTags = without(this.localSelectedTags, tag);
-      this.$emit('change', localSelectedTags);
+      this.$emit('change', this.localSelectedTags);
     },
     search(value) {
       this.localTags = this.searchedTags.filter(tag => includes(tag, value));
