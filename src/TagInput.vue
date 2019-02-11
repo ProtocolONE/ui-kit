@@ -80,9 +80,11 @@ export default {
     },
     addTag(tag) {
       this.localSelectedTags = concat(this.localSelectedTags, tag);
+      this.$emit('change', localSelectedTags);
     },
     removeTag(tag) {
       this.localSelectedTags = without(this.localSelectedTags, tag);
+      this.$emit('change', localSelectedTags);
     },
     search(value) {
       this.localTags = this.searchedTags.filter(tag => includes(tag, value));
