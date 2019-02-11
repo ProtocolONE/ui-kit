@@ -1,5 +1,6 @@
 import Button from './src/Button.vue';
 import Checkbox from './src/Checkbox.vue';
+import DateTimeInput from './src/DateTimeInput.vue';
 import LangButton from './src/LangButton.vue';
 import LangsBar from './src/LangsBar.vue';
 import Select from './src/Select.vue';
@@ -13,8 +14,9 @@ import Tip from './src/Tip.vue';
 export {
   Button,
   Checkbox,
-  LangsBar,
+  DateTimeInput,
   LangButton,
+  LangsBar,
   Select,
   SwitchBox,
   TagBox,

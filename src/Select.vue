@@ -25,11 +25,11 @@
     <div class="options">
       <label
         v-for="option in optionsView"
-        :key="option.value"
         class="option"
+        :key="option.value"
         :class="{
-          '_empty': !option.value,
-          '_current': option === option.value
+          '_empty': option.value === '',
+          '_current': selectValue === option.value
         }"
       >
         {{ option.label }}
@@ -115,7 +115,7 @@ export default {
       return [
         'select-field',
         this.focused ? '_focused' : '',
-        !this.selectValue ? '_empty' : '',
+        this.selectValue === '' ? '_empty' : '',
         this.disabled ? '_disabled' : '',
       ];
     },
