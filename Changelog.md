@@ -4,20 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2019-02-12
+- Fixed DateTimeInput response types from component api
+
 ## [1.1.2] - 2019-02-11
-- Fix TagInput
+- Fixed TagInput
 
 ## [1.1.1] - 2019-02-11
-- Fix TagInput response
+- Fixed TagInput response
 
 ## [1.1.0] - 2019-02-10
 - Added DateTimeInput, DateInput and TimeInput components
-- Fix small bugs
+- Fixed small bugs
 
 ## [1.0.0] - 2019-02-09
 - Rename Dropdown to Select
 - Correct Select API
-- Fix small bugs
+- Fixed small bugs
 
 ## [0.4.1] - 2019-02-08
 - Fixed popup's triangle from Tip component
