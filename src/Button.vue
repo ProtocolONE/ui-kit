@@ -5,7 +5,7 @@
   @click="emitClick"
 >
   {{ text }}
-  <slot/>
+  <slot />
 </button>
 </template>
 
@@ -18,7 +18,7 @@ export default {
       default: 'blue',
       type: String,
       validator(value) {
-        return includes(['blue', 'orange'], value);
+        return includes(['blue', 'orange', 'purple', 'green'], value);
       },
     },
     disabled: {
@@ -81,13 +81,15 @@ export default {
 /** @TODO - move to gui consts, fix color and typographics consts */
 $blue-button-color: #2f6ecd;
 $orange-button-color: #ff6f6f;
+$purple-button-color: #8077e7;
+$green-button-color: #009d19;
 $button-font-color: #fff;
 $disabled-button-color: #e1e1e1;
 
 $primary-button-size: 14px;
 $button-font-style: Loto;
 
-@mixin base-button($background, $minWidth: auto, $color: $button-font-color) {
+@mixin base-button($background, $color: $button-font-color) {
   background-color: $background;
   border-radius: 20px;
   border-width: 0;
@@ -104,7 +106,6 @@ $button-font-style: Loto;
   position: relative;
   text-align: center;
   transition: background-color 0.2s ease-out, box-shadow 0.2s ease-out;
-  min-width: $minWidth;
 
   &:before {
     bottom: 1px;
@@ -151,7 +152,13 @@ $button-font-style: Loto;
     @include base-button($blue-button-color);
   }
   &._orange {
-    @include base-button($orange-button-color, 140px);
+    @include base-button($orange-button-color);
+  }
+  &._purple {
+    @include base-button($purple-button-color);
+  }
+  &._green {
+    @include base-button($green-button-color);
   }
 }
 </style>

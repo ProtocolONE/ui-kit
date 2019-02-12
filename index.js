@@ -10,6 +10,8 @@ import TagInput from './src/TagInput.vue';
 import TagList from './src/TagList.vue';
 import TextField from './src/TextField.vue';
 import Tip from './src/Tip.vue';
+import Header from './src/Header.vue';
+import PageHeader from './src/PageHeader.vue';
 
 export {
   Button,
@@ -24,4 +26,6 @@ export {
   TagList,
   TextField,
   Tip,
+  Header,
+  PageHeader,
 };
