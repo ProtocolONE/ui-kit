@@ -1,9 +1,9 @@
 <template>
 <div class="time-input">
   <Select
-    v-model="localTime"
     :label="timeLabel"
     :options="times"
+    :value="localTime"
     @input="changeTime"
   />
 </div>
@@ -11,6 +11,8 @@
 
 <script>
 import Select from './Select.vue';
+
+const ONE_HOUR = 60 * 60 * 1000;
 
 /** Times array for select */
 function getTimes() {
@@ -21,7 +23,7 @@ function getTimes() {
       // label for hour
       label: `${hourStr}:00 UTC`,
       // timestamp for hour
-      value: value * 60 * 60 * 1000,
+      value: value * ONE_HOUR,
     };
   });
 }
@@ -40,9 +42,15 @@ export default {
   },
   data() {
     return {
-      localTime: this.time,
       times: getTimes(),
     };
+  },
+  computed: {
+    localTime() {
+      const timeNumber = new Date(this.time).getTime();
+
+      return Math.ceil(timeNumber / ONE_HOUR) * ONE_HOUR;
+    },
   },
   methods: {
     changeTime(value) {

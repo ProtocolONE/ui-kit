@@ -60,6 +60,11 @@ export default {
       localDate: this.date,
     };
   },
+  watch: {
+    date(value) {
+      this.localDate = value;
+    },
+  },
   computed: {
     datepickerClasses() {
       return [
