@@ -44,7 +44,10 @@
         >
       </label>
     </div>
-    <div class="overlay" />
+    <div
+      v-if="optionsView.length > 5"
+      class="overlay"
+    />
   </div>
 </div>
 </template>
@@ -172,17 +175,14 @@ $secondary-input-size: 14px;
 
 .select-field {
   background-color: $input-background-color;
-  border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
   color: $primary-input-color;
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
   font-size: $primary-input-size;
-  height: 56px;
   padding: 24px 0;
   position: relative;
-  transition: border-color 0.2s ease-out;
   width: 100%;
 
   &:after {
@@ -199,6 +199,7 @@ $secondary-input-size: 14px;
       pointer-events: auto;
       width: 50%;
       transform: translateY(-24px) scale(0.875, 0.875);
+      border-color: transparent;
     }
 
     & > .selected {
@@ -223,13 +224,12 @@ $secondary-input-size: 14px;
   }
 
   &._focused {
-    border-color: $input-background-color;
-
     &:after {
       border-top-color: $focus-input-color;
     }
 
     & > .label {
+      border-color: transparent;
       color: $focus-input-color;
     }
 
@@ -239,10 +239,6 @@ $secondary-input-size: 14px;
   }
 
   &._disabled {
-    &:not(._empty) {
-      border-bottom-color: transparent;
-    }
-    border-bottom-color: transparent;
     color: $secondary-input-color;
     pointer-events: none;
   }
@@ -257,7 +253,7 @@ $secondary-input-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  max-width: calc(100% - 12px);
+  border-bottom: 1px solid #e5e5e5;
 }
 .box {
   background-color: $input-background-color;
@@ -319,6 +315,7 @@ input {
 }
 .additional,
 .label {
+  display: block;
   color: $secondary-input-color;
   line-height: 32px;
   margin: 0;
@@ -335,6 +332,8 @@ input {
   transform-origin: left;
   transition: transform 0.2s ease-out, color 0.2s linear, width 0.1s ease-out;
   width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  height: 32px;
 }
 .additional {
   font-size: $secondary-input-size;
