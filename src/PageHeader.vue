@@ -17,11 +17,13 @@
           <template
             v-if="breadcrumb.url"
           >
-            <router-link 
+            <component
+              :is="routerComponentName"
               v-if="breadcrumb.router"
               :to="breadcrumb.url"
-              v-text="breadcrumb.label"
-            />
+            >
+              {{ breadcrumb.label }}
+            </component>
             <a 
               v-else
               :href="breadcrumb.url"
@@ -36,6 +38,7 @@
       </li>
     </ul>
     <Header level="1">
+      {{ title }}
       <slot name="title" />
     </Header>
   </div>
@@ -62,6 +65,9 @@ export default {
   },
 
   props: {
+    title: {
+      type: String,
+    },
     /**
      * @typedef {{label: string, url?: string, router?: boolean}} Breadcrumb
      * @type {Breadcrumb[]}
@@ -69,6 +75,18 @@ export default {
     breadcrumbs: {
       type: Array,
       default: () => [],
+    },
+  },
+
+  computed: {
+    routerComponentName() {
+      if (this.$options.components.NuxtLink) {
+        return 'NuxtLink';
+      }
+      if (this.$options.components.RouterLink) {
+        return 'RouterLink';
+      }
+      return '';
     },
   },
 };
@@ -83,6 +101,7 @@ export default {
   align-content: center;
   height: 84px;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.07);
+  background: #fff;
 }
 
 .breadcrumbs-and-title {
