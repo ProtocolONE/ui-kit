@@ -51,35 +51,50 @@
   <div class="bottom">
     <slot name="bottom" />
 
-    <div class="auth-logo">
-      <IconAuth />
-    </div>
-    <div class="auth">
-      <template v-if="!isAuthorised">
-        <span
-          class="auth-item"
-          @click="$emit('login')"
-        >
-          {{ $t('login') }}
-        </span>
-        <span
-          class="auth-item"
-          @click="$emit('register')"
-        >
-          {{ $t('register') }}
-        </span>
-      </template>
+    <div class="user">
+      <div 
+        class="user-logo"
+        :title="isAuthorised ? userName : null"
+      >
+        <IconAuth />
+      </div>
       <div
-        v-else
-        class="logout"
+        v-if="isAuthorised"
+        class="user-name"
       >
         <span>{{ userName }}</span>
-        <span @click="$emit('open-profile')">
-          {{ $t('profile') }}
-        </span>
-        <span @click="$emit('logout')">
-          {{ $t('quit') }}
-        </span>
+      </div>
+      <div class="user-menu">
+        <template v-if="!isAuthorised">
+          <span
+            class="user-menu-item"
+            @click="$emit('login')"
+          >
+            {{ $t('login') }}
+          </span>
+          <span
+            class="user-menu-item"
+            @click="$emit('register')"
+          >
+            {{ $t('register') }}
+          </span>
+        </template>
+        <template
+          v-else
+        >
+          <span
+            class="user-menu-item"
+            @click="$emit('open-profile')"
+          >
+            {{ $t('profile') }}
+          </span>
+          <span
+            class="user-menu-item"
+            @click="$emit('logout')"
+          >
+            {{ $t('quit') }}
+          </span>
+        </template>
       </div>
     </div>
   </div>
@@ -125,7 +140,7 @@ export default {
       default: false,
       type: Boolean,
     },
-    /** Name by auth user */
+    /** Authed user name */
     userName: {
       default: '',
       type: String,
@@ -287,19 +302,17 @@ $hover-font-color: #fff;
   white-space: nowrap;
   overflow: hidden;
 }
-.auth-logo {
+
+.user {
+}
+.user-logo {
   padding: 16px;
   cursor: pointer;
   max-width: 80px;
   width: 100%;
-
-  &:hover ~ .auth {
-    visibility: visible;
-    opacity: 1;
-  }
 }
-.auth {
-  visibility: hidden;
+
+.user-menu {
   opacity: 0;
   transition: opacity 0.2s ease-out;
   position: absolute;
@@ -307,12 +320,35 @@ $hover-font-color: #fff;
   bottom: 0;
   left: 80px;
 
-  &:hover {
-    visibility: visible;
+  .user:hover & {
     opacity: 1;
   }
 }
-.auth-item {
+
+.user-name {
+  position: absolute;
+  width: 144px;
+  height: 80px;
+  bottom: 0;
+  left: 80px;
+  opacity: 1;
+  transition: opacity 0.2s ease-out;
+  display: flex;
+  align-items: center;
+
+  .user:hover & {
+    opacity: 0;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    max-width: 100%;
+  }
+}
+
+.user-menu-item {
   display: block;
   height: 40px;
   line-height: 40px;
