@@ -13,6 +13,7 @@ import Tip from './src/Tip.vue';
 import Header from './src/Header.vue';
 import PageHeader from './src/PageHeader.vue';
 import PageNavbar from './src/PageNavbar.vue';
+import FormByStep from './src/FormByStep.vue';
 
 export {
   Button,
@@ -30,4 +31,5 @@ export {
   Header,
   PageHeader,
   PageNavbar,
+  FormByStep,
 };
