@@ -9,6 +9,5 @@
   display: table;
   width: 100%;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  margin-top: -1px;
 }
 </style>

@@ -3,7 +3,7 @@
   class="ui-table-row"
   :class="{'_head': isHead}"
 >
-  <slot :isHead="isHead" />
+  <slot />
 </div>
 </template>
 
