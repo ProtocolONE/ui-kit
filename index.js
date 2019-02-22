@@ -14,6 +14,9 @@ import Header from './src/Header.vue';
 import PageHeader from './src/PageHeader.vue';
 import PageNavbar from './src/PageNavbar.vue';
 import FormByStep from './src/FormByStep.vue';
+import UiTable from './src/UiTable.vue';
+import UiTableCell from './src/UiTableCell.vue';
+import UiTableRow from './src/UiTableRow.vue';
 
 export {
   Button,
@@ -32,4 +35,7 @@ export {
   PageHeader,
   PageNavbar,
   FormByStep,
+  UiTable,
+  UiTableCell,
+  UiTableRow,
 };

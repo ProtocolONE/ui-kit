@@ -100,7 +100,7 @@ export default {
   justify-content: space-between;
   align-content: center;
   height: 84px;
-  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.07);
   background: #fff;
 }
 
@@ -114,8 +114,8 @@ export default {
 .hint,
 .search {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .hint {
