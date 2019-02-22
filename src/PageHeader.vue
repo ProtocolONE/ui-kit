@@ -114,8 +114,8 @@ export default {
 .hint,
 .search {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  align-items: center;
 }
 
 .hint {
