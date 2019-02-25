@@ -22,7 +22,7 @@
   <component
     :is="logoLinkTagName"
     class="logo"
-    :to="logoLink && logoLink.router ? logoLink.url : null"
+    :to="logoLink && isRouter(logoLink.router) ? logoLink.url : null"
     :href="logoLink ? logoLink.url : null"
   >
     <span class="logo-icon">
@@ -36,11 +36,11 @@
 
   <div class="navgition-links">
     <component
-      :is="link.router ? routerComponentName : 'a'"
       v-for="(link, index) in navigationLinks"
+      :is="isRouter(link.router) ? routerComponentName : 'a'"
       :key="index"
-      :class="['navgition-link', {'_active': link.isActive}]"
-      :to="link.router ? link.url : null"
+      :class="['navgition-link', { '_active': link.isActive }]"
+      :to="isRouter(link.router) ? link.url : null"
       :href="link.url"
     >
       <span class="navgition-link-icon" />
@@ -167,6 +167,17 @@ export default {
       }
 
       return 'a';
+    },
+  },
+
+  methods: {
+    /**
+     * Default value for router is true
+     * @param {?Boolean} router
+     * @return {Boolean}
+     */
+    isRouter(router) {
+      return router === false ? false : true;
     },
   },
 };
