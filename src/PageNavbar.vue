@@ -177,7 +177,7 @@ export default {
      * @return {Boolean}
      */
     isRouter(router) {
-      return router === false ? false : true;
+      return router !== false;
     },
   },
 };

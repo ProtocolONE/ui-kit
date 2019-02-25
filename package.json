@@ -35,5 +35,9 @@
   "browserslist": [
     "defaults",
     "not ie < 11"
-  ]
+  ],
+  "repository": {
+    "type" : "git",
+    "url" : "git+https://github.com/ProtocolONE/ui-kit.git"
+  }
 }
