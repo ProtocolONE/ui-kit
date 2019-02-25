@@ -19,7 +19,7 @@
           >
             <component
               :is="routerComponentName"
-              v-if="breadcrumb.router"
+              v-if="breadcrumb.router !== false"
               :to="breadcrumb.url"
             >
               {{ breadcrumb.label }}

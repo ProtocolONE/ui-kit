@@ -7,7 +7,7 @@
     '_hoverable': isHoverable,
     '_clickable': link
   }"
-  :to="link && link.router ? link.url : null"
+  :to="link && isRouter(link.router) ? link.url : null"
   :href="link ? link.url : null"
 >
   <slot />
@@ -52,6 +52,17 @@ export default {
       }
 
       return 'a';
+    },
+  },
+
+  methods: {
+    /**
+     * Default value for router is true
+     * @param {?Boolean} router
+     * @return {Boolean}
+     */
+    isRouter(router) {
+      return router !== false;
     },
   },
 };
