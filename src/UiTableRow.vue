@@ -1,15 +1,17 @@
 <template>
-<div
+<component
+  :is="tagName"
   class="ui-table-row"
   :class="{
     '_head': isHead,
     '_hoverable': isHoverable,
-    '_clickable': url
+    '_clickable': link
   }"
-  @click="handleRowClick"
+  :to="link && link.router ? link.url : null"
+  :href="link ? link.url : null"
 >
   <slot />
-</div>
+</component>
 </template>
 
 <script>
@@ -25,16 +27,31 @@ export default {
       type: Boolean,
       default: true,
     },
-    url: {
-      type: String,
+    link: {
+      type: Object,
     },
   },
 
-  methods: {
-    handleRowClick() {
-      if (this.url) {
-        this.$router.push(this.url);
+  computed: {
+    routerComponentName() {
+      if (this.$options.components.NuxtLink) {
+        return 'NuxtLink';
       }
+      if (this.$options.components.RouterLink) {
+        return 'RouterLink';
+      }
+      return 'a';
+    },
+    tagName() {
+      if (!this.link) {
+        return 'div';
+      }
+
+      if (this.link && this.link.router) {
+        return this.routerComponentName;
+      }
+
+      return 'a';
     },
   },
 };
@@ -44,8 +61,9 @@ export default {
 <style lang="scss" scoped>
 .ui-table-row {
   display: table-row;
+  text-decoration: none;
 
-  &._clickable:hover {
+  &._hoverable:hover {
     background: #e3eeff;
   }
 
