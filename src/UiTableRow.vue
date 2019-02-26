@@ -7,8 +7,8 @@
     '_hoverable': isHoverable,
     '_clickable': link
   }"
-  :to="link && isRouter(link.router) ? link.url : null"
-  :href="link ? link.url : null"
+  :to="link && isRouter(link.router) ? url : null"
+  :href="link ? url : null"
 >
   <slot />
 </component>
@@ -28,7 +28,7 @@ export default {
       default: true,
     },
     link: {
-      type: Object,
+      type: [Object, String],
     },
   },
 
@@ -47,11 +47,14 @@ export default {
         return 'div';
       }
 
-      if (this.link && this.link.router) {
+      if (this.isRouter(this.link.router)) {
         return this.routerComponentName;
       }
 
       return 'a';
+    },
+    url() {
+      return typeof this.link === 'string' ? this.link : this.link.url;
     },
   },
 
