@@ -47,20 +47,7 @@
     </Header>
   </div>
 
-  <slot
-    name="search"
-    class="search"
-  />
-
-  <slot
-    name="hint"
-    class="hint"
-  />
-
-  <slot
-    name="right"
-    class="right"
-  />
+  <slot />
 </div>
 </template>
 
@@ -101,16 +88,6 @@ export default {
       return '';
     },
   },
-
-  created() {
-    /**
-     * set class from slot name to slot container
-     * @TODO - remove this kostil' on new major version
-     */
-    Object.keys(this.$slots).forEach(slotName => {
-      this.$slots[slotName][0].data.class = slotName;
-    });
-  },
 };
 </script>
 
@@ -130,21 +107,6 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.right,
-.hint,
-.search {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.hint {
-  line-height: 17px;
-  font-size: 12px;
-
-  color: #b1b1b1;
 }
 
 .breadcrumbs {
