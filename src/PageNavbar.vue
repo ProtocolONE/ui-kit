@@ -22,8 +22,8 @@
   <component
     :is="logoLinkTagName"
     class="logo"
-    :to="logoLink && isRouter(logoLink.router) ? logoLink.url : null"
-    :href="logoLink ? logoLink.url : null"
+    :to="logoLink && isRouter(logoLink.router) ? url : null"
+    :href="logoLink ? url : null"
   >
     <span class="logo-icon">
       <slot name="logo" />
@@ -103,7 +103,6 @@
 </template>
 
 <script>
-import { has } from 'lodash-es';
 import IconAuth from './IconAuth.vue';
 
 export default {
@@ -114,13 +113,10 @@ export default {
     /**
      * Main logo link
      *
-     * @type {{url: string, router?: boolean}}
+     * @type {{url: string, router?: boolean} || string}
      */
     logoLink: {
-      type: Object,
-      validator(value) {
-        return has(value, 'url');
-      },
+      type: [Object, String],
     },
     title: {
       type: String,
@@ -162,11 +158,14 @@ export default {
         return 'span';
       }
 
-      if (this.logoLink && this.logoLink.router) {
+      if (isRouter(this.logoLink.router)) {
         return this.routerComponentName;
       }
 
       return 'a';
+    },
+    url() {
+      return typeof this.logoLink === 'string' ? this.logoLink : this.logoLink.url;
     },
   },
 
