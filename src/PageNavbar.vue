@@ -158,7 +158,7 @@ export default {
         return 'span';
       }
 
-      if (isRouter(this.logoLink.router)) {
+      if (this.isRouter(this.logoLink.router)) {
         return this.routerComponentName;
       }
 
