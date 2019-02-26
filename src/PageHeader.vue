@@ -97,7 +97,10 @@ export default {
   },
 
   created() {
-    // --- set class from slot name to slot container
+    /**
+     * set class from slot name to slot container
+     * @TODO - remove this kostil' on new major version
+     */
     Object.keys(this.$slots).forEach(slotName => {
       this.$slots[slotName][0].data.class = slotName;
     });
