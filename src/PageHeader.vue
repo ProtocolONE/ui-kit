@@ -10,6 +10,10 @@
         :key="index"
         class="breadcrumbs-item"
       >
+        <IconBackpointer
+          v-if="index === 0" 
+          class="breadcrumb-icon"
+        />
         <slot
           name="breadcrumb"
           :breadcrumb="breadcrumb"
@@ -62,12 +66,14 @@
 
 <script>
 import Header from './Header.vue';
+import IconBackpointer from './IconBackpointer.vue';
 
 export default {
   name: 'PageHeader',
 
   components: {
     Header,
+    IconBackpointer,
   },
 
   props: {
@@ -152,13 +158,8 @@ export default {
 .breadcrumbs-item {
   color: #b1b1b1;
   font-size: 14px;
-
-  &:first-child:before {
-    content: url('data:image/svg+xml; utf8, <svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M6 1L2 4.95506L6 9" stroke="#999999" stroke-width="2" stroke-linecap="round"/>
-      </svg>');
-    margin-right: 8px;
-  }
+  display: flex;
+  align-items: center;
 
   &:after {
     content: '/';
@@ -172,5 +173,9 @@ export default {
   a {
     color: inherit;
   }
+}
+
+.breadcrumb-icon {
+  margin-right: 8px;
 }
 </style>
