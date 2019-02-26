@@ -40,7 +40,7 @@ export default {
       default: 'button',
       type: String,
       validator(value) {
-        return includes(['button', 'submit'], value);
+        return includes(['button', 'submit', 'reset'], value);
       },
     },
   },

@@ -42,15 +42,21 @@
       <slot name="title" />
     </Header>
   </div>
-  <div class="search">
-    <slot name="search" />
-  </div>
-  <div class="hint">
-    <slot name="hint" />
-  </div>
-  <div class="right">
-    <slot name="right" />
-  </div>
+
+  <slot
+    name="search"
+    class="search"
+  />
+
+  <slot
+    name="hint"
+    class="hint"
+  />
+
+  <slot
+    name="right"
+    class="right"
+  />
 </div>
 </template>
 
@@ -88,6 +94,13 @@ export default {
       }
       return '';
     },
+  },
+
+  created() {
+    // --- set class from slot name to slot container
+    Object.keys(this.$slots).forEach(slotName => {
+      this.$slots[slotName][0].data.class = slotName;
+    });
   },
 };
 </script>
