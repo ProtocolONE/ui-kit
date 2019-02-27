@@ -12,8 +12,12 @@
 </div>
 </template>
 
-<script type="ts">
+<script>
 export default {
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
   props: {
     value: {
       type: String,

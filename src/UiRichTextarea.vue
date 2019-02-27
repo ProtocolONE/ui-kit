@@ -2,16 +2,16 @@
 <wysiwyg
   class="wysiwyg-editor"
   :placeholder="placeholder"
-  :options="wysiwygOpts"
+  :options="wysiwygOptions"
   :html="value"
   @change="$emit('input', $event)"
 />
 </template>
 
-<script type="ts">
+<script>
 import wysiwyg from 'vue-wysiwyg';
 
-const wysiwygOpts = {
+const wysiwygOptions = {
   iconOverrides: {},
   hideModules: {
     justifyLeft: true,
@@ -31,6 +31,10 @@ const wysiwygOpts = {
 };
 
 export default {
+  model: {
+    prop: 'value',
+    event: 'input'
+  },
   components: { wysiwyg: wysiwyg.component },
   props: {
     placeholder: {
@@ -44,7 +48,7 @@ export default {
   },
   data() {
     return {
-      wysiwygOpts,
+      wysiwygOptions,
     };
   },
 };
