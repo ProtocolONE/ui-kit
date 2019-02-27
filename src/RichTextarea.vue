@@ -1,0 +1,58 @@
+<template>
+<wysiwyg
+  class="wysiwyg-editor"
+  :placeholder="placeholder"
+  :options="wysiwygOpts"
+  :html="value"
+  @change="$emit('input', $event)"
+/>
+</template>
+
+<script type="ts">
+import wysiwyg from 'vue-wysiwyg';
+
+const wysiwygOpts = {
+  iconOverrides: {},
+  hideModules: {
+    justifyLeft: true,
+    justifyCenter: true,
+    justifyRight: true,
+    headings: true,
+    link: true,
+    code: true,
+    orderedList: true,
+    unorderedList: true,
+    image: true,
+    table: true,
+    removeFormat: true,
+    separator: true,
+  },
+  forcePlainTextOnPaste: true
+};
+
+export default {
+  components: { wysiwyg: wysiwyg.component },
+  props: {
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    value: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      wysiwygOpts,
+    };
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import '~vue-wysiwyg/dist/vueWysiwyg.css';
+.wysiwyg-editor {
+  margin: 8px 0;
+}
+</style>

@@ -17,6 +17,8 @@ import FormByStep from './src/FormByStep.vue';
 import UiTable from './src/UiTable.vue';
 import UiTableCell from './src/UiTableCell.vue';
 import UiTableRow from './src/UiTableRow.vue';
+import Textarea from './src/Textarea.vue';
+import RichTextarea from './src/RichTextarea.vue';
 
 export {
   Button,
@@ -38,4 +40,6 @@ export {
   UiTable,
   UiTableCell,
   UiTableRow,
+  Textarea,
+  RichTextarea,
 };
