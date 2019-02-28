@@ -3,24 +3,30 @@
   <div class="list">
     <div
       v-for="(tag, index) in tags"
-      class="tag"
       :key="index"
+      class="tag"
       @click="$emit('addTag', tag)"
     >
-      {{ tag }}
-      <span class="add-tag-label">{{ addTagLabel }}</span>
+      {{ getTagLabel(tag) }}
+      <span class="add-tag-label">
+        {{ addTagLabel }}
+      </span>
     </div>
   </div>
   <div
     v-if="tags.length > 5"
     class="overlay"
-  ></div>
+  />
 </div>
 </template>
 
 <script>
 export default {
   props: {
+    /**
+     * @typedef {string | {label: string, id: string}} Tag
+     * @type {Tag[]}
+     */
     tags: {
       default: () => [],
       type: Array,
@@ -28,9 +34,15 @@ export default {
     addTagLabel: {
       default: 'Add',
       type: String,
-    }
+    },
   },
-}
+
+  methods: {
+    getTagLabel(tag) {
+      return typeof tag === 'string' ? tag : tag.label;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

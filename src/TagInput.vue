@@ -39,10 +39,18 @@ export default {
       default: 'List of tags',
       type: String,
     },
+    /**
+     * @typedef {string | {label: string, id: string}} Tag
+     * @type {Tag[]}
+     */
     selectedTags: {
       default: () => [],
       type: Array,
     },
+    /**
+     * @typedef {string | {label: string, id: string}} Tag
+     * @type {Tag[]}
+     */
     tags: {
       default: () => [],
       type: Array,
@@ -57,10 +65,18 @@ export default {
   },
   computed: {
     searchedTags() {
-      return without(this.tags, ...this.localSelectedTags);
+      const localSelectedTagsValues = this.getTagValuesArray(this.localSelectedTags);
+      return this.tags.filter(tag => {
+        const tagId = typeof tag === 'string' ? tag : tag.id;
+        return !includes(localSelectedTagsValues, tagId);
+      });
     },
     unselectedTags() {
-      return without(this.localTags, ...this.localSelectedTags);
+      const localSelectedTagsValues = this.getTagValuesArray(this.localSelectedTags);
+      return this.localTags.filter(tag => {
+        const tagId = typeof tag === 'string' ? tag : tag.id;
+        return !includes(localSelectedTagsValues, tagId);
+      });
     },
   },
   watch: {
@@ -72,6 +88,9 @@ export default {
     },
   },
   methods: {
+    getTagValuesArray(array) {
+      return array.map(tag => (typeof tag === 'string' ? tag : tag.id));
+    },
     blur() {
       this.fieldFocused = false;
     },
@@ -87,7 +106,10 @@ export default {
       this.$emit('change', this.localSelectedTags);
     },
     search(value) {
-      this.localTags = this.searchedTags.filter(tag => includes(tag, value));
+      this.localTags = this.searchedTags.filter(tag => {
+        const tagLabel = typeof tag === 'string' ? tag : tag.label;
+        return includes(tagLabel, value);
+      });
     },
   },
 };
