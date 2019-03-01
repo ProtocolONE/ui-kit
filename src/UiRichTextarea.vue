@@ -55,7 +55,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../node_modules/vue-wysiwyg/dist/vueWysiwyg.css';
+@import '~vue-wysiwyg/dist/vueWysiwyg.css';
+
 .wysiwyg-editor {
   margin: 8px 0;
 }
