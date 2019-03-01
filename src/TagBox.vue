@@ -2,11 +2,11 @@
 <div class="tag-box">
   <span
     v-for="(tag, index) in tags"
-    :class="['tag', `_color-${index % 16 + 1}`]"
     :key="index"
+    :class="['tag', `_color-${index % 16 + 1}`]"
     @click="$emit('removeTag', tag)"
   >
-    {{ tag }}
+    {{ getTagLabel(tag) }}
   </span>
 </div>
 </template>
@@ -14,12 +14,22 @@
 <script>
 export default {
   props: {
+    /**
+     * @typedef {string | {label: string, id: string}} Tag
+     * @type {Tag[]}
+     */
     tags: {
       default: () => [],
       type: Array,
     },
   },
-}
+
+  methods: {
+    getTagLabel(tag) {
+      return typeof tag === 'string' ? tag : tag.label;
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
