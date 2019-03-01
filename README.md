@@ -29,4 +29,4 @@ yarn lint
 1. Correct the readme.md
 2. Move css variables to gui.scss and universalize
 3. Clean extra styles
-4. Add tab-indexing feature for Dropdown component
+4. Add tab-indexing feature for Select component
