@@ -27,15 +27,15 @@ const wysiwygOptions = {
     removeFormat: true,
     separator: true,
   },
-  forcePlainTextOnPaste: true
+  forcePlainTextOnPaste: true,
 };
 
 export default {
+  components: { wysiwyg: wysiwyg.component },
   model: {
     prop: 'value',
-    event: 'input'
+    event: 'input',
   },
-  components: { wysiwyg: wysiwyg.component },
   props: {
     placeholder: {
       type: String,
@@ -55,7 +55,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '~vue-wysiwyg/dist/vueWysiwyg.css';
+@import '../node_modules/vue-wysiwyg/dist/vueWysiwyg.css';
 .wysiwyg-editor {
   margin: 8px 0;
 }
