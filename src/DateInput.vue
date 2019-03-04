@@ -16,7 +16,7 @@
       :inline="true"
       :language="language"
       :mondayFirst="mondayFirst"
-      :value="localDate || ''"
+      :value="localDate"
       @selected="changeDateByPicker"
     />
   </div>
