@@ -38,6 +38,10 @@ export default {
     clickaway,
   },
   components: { TagBox, TagList, TextField },
+  model: {
+    prop: 'selectedTags',
+    event: 'change',
+  },
   props: {
     label: {
       default: 'List of tags',
