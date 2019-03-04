@@ -34,9 +34,10 @@ function timestampParse(timestamp) {
 
   // One day in ms
   const dateDelimeter = 24 * 60 * 60 * 1000;
+  const timestampTime = new Date(timestamp).getTime();
 
-  const date = new Date(Math.floor(timestamp / dateDelimeter) * dateDelimeter);
-  const time = new Date(timestamp % dateDelimeter);
+  const date = Math.floor(timestampTime / dateDelimeter) * dateDelimeter;
+  const time = timestampTime % dateDelimeter;
 
   return {
     date,
@@ -88,6 +89,12 @@ export default {
   },
   methods: {
     dateChange(date) {
+      if (date === 0) {
+        this.date = date;
+        this.$emit('input', 0);
+        return;
+      }
+
       const timestamp = new Date(date).getTime() + new Date(this.time).getTime();
 
       this.date = date;

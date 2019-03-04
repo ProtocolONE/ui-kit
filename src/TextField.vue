@@ -90,6 +90,7 @@ export default {
         !this.inputValue ? '_empty' : '',
         this.isVisibleError ? '_error' : '',
         this.disabled ? '_disabled' : '',
+        this.required ? '_required' : '',
       ];
     },
   },
@@ -167,6 +168,12 @@ $secondary-input-size: 14px;
     color: $secondary-input-color;
     pointer-events: none;
   }
+
+  &._required ~ .label {
+    &:after {
+      content: '*';
+    }
+  }
 }
 .additional,
 .label {
@@ -186,6 +193,10 @@ $secondary-input-size: 14px;
   transform-origin: left;
   transition: transform 0.2s ease-out, color 0.2s linear, width 0.1s ease-out;
   width: 100%;
+
+  &:after {
+    color: #f00;
+  }
 }
 .additional {
   font-size: $secondary-input-size;
