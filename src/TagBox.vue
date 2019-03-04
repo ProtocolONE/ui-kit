@@ -1,5 +1,8 @@
 <template>
-<div class="tag-box">
+<div 
+  class="tag-box"
+  :class="[`_indent-${indent}`, {'_no-tags': !tags.length}]"
+>
   <span
     v-for="(tag, index) in tags"
     :key="index"
@@ -12,6 +15,8 @@
 </template>
 
 <script>
+import { includes } from 'lodash-es';
+
 export default {
   props: {
     /**
@@ -21,6 +26,14 @@ export default {
     tags: {
       default: () => [],
       type: Array,
+    },
+
+    indent: {
+      type: String,
+      default: 'default',
+      validator(value) {
+        return includes(['default', 'shallow'], value);
+      },
     },
   },
 
@@ -67,6 +80,14 @@ $tag-colors: (
   width: 100%;
   flex-wrap: wrap;
   padding: 8px 0;
+
+  &._indent-shallow {
+    padding-bottom: 0;
+
+    &._no-tags {
+      padding-top: 0;
+    }
+  }
 }
 .tag {
   position: relative;
