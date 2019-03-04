@@ -4,7 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.9.2] - 2019-02-29
+## [1.10.0] - 2019-03-04
+- Add new option indent with value 'shallow' for TagBox and TagInput
+- Add v-model support for TagInput
+
+## [1.9.2] - 2019-03-01
 - Fix load css with tilda notation from UiRichTextarea
 
 ## [1.9.1] - 2019-02-29
