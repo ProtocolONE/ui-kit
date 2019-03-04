@@ -16,7 +16,7 @@
       :inline="true"
       :language="language"
       :mondayFirst="mondayFirst"
-      :value="localDate"
+      :value="localDate || ''"
       @selected="changeDateByPicker"
     />
   </div>
@@ -98,6 +98,13 @@ export default {
       this.datepickerOpened = true;
     },
     changeDateByInput(value) {
+      if (value === '') {
+        this.hasError = false;
+        this.localDate = localDate;
+        this.$emit('input', 0);
+        return;
+      }
+
       const locale = locales[this.locale];
       const localDate = parse(value, this.format, new Date().getTime(), { locale });
 
@@ -105,7 +112,7 @@ export default {
         this.hasError = true;
         return;
       }
-      
+
       this.hasError = false;
       this.localDate = localDate;
       this.$emit('input', new Date(localDate.toDateString()).getTime());
