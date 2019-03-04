@@ -1,6 +1,6 @@
 {
   "name": "@protocol-one/ui-kit",
-  "version": "1.9.2",
+  "version": "1.10.0",
   "scripts": {
     "lint": "vue-cli-service lint"
   },
