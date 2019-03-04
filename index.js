@@ -1,5 +1,6 @@
 import Button from './src/Button.vue';
 import Checkbox from './src/Checkbox.vue';
+import DateInput from './src/DateInput.vue';
 import DateTimeInput from './src/DateTimeInput.vue';
 import LangButton from './src/LangButton.vue';
 import LangsBar from './src/LangsBar.vue';
@@ -23,6 +24,7 @@ import UiRichTextarea from './src/UiRichTextarea.vue';
 export {
   Button,
   Checkbox,
+  DateInput,
   DateTimeInput,
   LangButton,
   LangsBar,
