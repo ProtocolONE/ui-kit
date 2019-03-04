@@ -1,7 +1,11 @@
 <template>
-<div class="tag-input">
+<div
+  class="tag-input"
+  :class="`_indent-${indent}`"
+>
   <TagBox
     :tags="localSelectedTags"
+    :indent="indent"
     @removeTag="removeTag"
   />
   <div
@@ -34,6 +38,10 @@ export default {
     clickaway,
   },
   components: { TagBox, TagList, TextField },
+  model: {
+    prop: 'selectedTags',
+    event: 'change',
+  },
   props: {
     label: {
       default: 'List of tags',
@@ -54,6 +62,14 @@ export default {
     tags: {
       default: () => [],
       type: Array,
+    },
+
+    indent: {
+      type: String,
+      default: 'default',
+      validator(value) {
+        return includes(['default', 'shallow'], value);
+      },
     },
   },
   data() {
@@ -119,6 +135,10 @@ export default {
 .tag-input {
   padding: 24px 0;
   width: 100%;
+
+  &._indent-shallow {
+    padding: 0;
+  }
 }
 .field {
   max-width: 320px;
