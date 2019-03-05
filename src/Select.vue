@@ -6,7 +6,7 @@
 >
   <span
     v-if="label"
-    class="label"
+    :class="['label', { '_required': required }]"
     :title="label"
   >
     {{ label }}
@@ -334,6 +334,13 @@ input {
   width: 100%;
   border-bottom: 1px solid #e5e5e5;
   height: 32px;
+
+  &._required {
+    &:after {
+      content: '*';
+      color: #f00;
+    }
+  }
 }
 .additional {
   font-size: $secondary-input-size;
