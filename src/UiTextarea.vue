@@ -1,13 +1,13 @@
 <template>
 <div class="textarea">
-  <label
-    class="label"
-    v-text="label"
-  />
+  <label :class="['label', { '_required': required }]">
+    {{ label }}
+  </label>
   <textarea
-    class="body"
-    @input="$emit('input', $event.target.value)"
     v-text="value"
+    :class="['body', { '_bordered': isBordered }]"
+    :style="{ height: `${countLines * 32}px`}"
+    @input="$emit('input', $event.target.value)"
   />
 </div>
 </template>
@@ -19,13 +19,25 @@ export default {
     event: 'input'
   },
   props: {
-    value: {
-      type: String,
-      required: true,
+    countLines: {
+      default: 3,
+      type: Number,
+    },
+    isBordered: {
+      default: false,
+      type: Boolean,
     },
     label: {
-      type: String,
       default: 'Label',
+      type: String,
+    },
+    required: {
+      default: false,
+      type: Boolean,
+    },
+    value: {
+      required: true,
+      type: String,
     },
   },
 }
@@ -33,7 +45,7 @@ export default {
 
 <style scoped lang="scss">
 .textarea {
-  margin-bottom: 60px;
+  padding: 24px 0;
 }
 .label {
   color: #b1b1b1;
@@ -41,18 +53,31 @@ export default {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  &._required {
+    &:after {
+      content: '*';
+      color: #f00;
+    }
+  }
 }
 .body {
   background-color: #fff;
   border-width: 0;
-  border-bottom-width: 1px;
-  border-color: #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
   color: #333;
-  min-height: 63px;
+  min-height: 32px;
+  line-height: 32px;
   outline: none;
   padding: 0;
   width: 100%;
   display: block;
+
+  &._bordered {
+    border: 1px solid #e5e5e5;
+    padding: 0 12px;
+    border-radius: 2px;
+  }
 }
 </style>
