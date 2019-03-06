@@ -5,7 +5,8 @@
   </label>
   <textarea
     v-text="value"
-    :class="['body', { '_bordered': isBordered }]"
+    :disabled="disabled"
+    :class="['input', { '_bordered': isBordered, '_disabled': disabled }]"
     :style="{ height: `${countLines * 32}px`}"
     @input="$emit('input', $event.target.value)"
   />
@@ -22,6 +23,10 @@ export default {
     countLines: {
       default: 3,
       type: Number,
+    },
+    disabled: {
+      default: false,
+      type: Boolean,
     },
     isBordered: {
       default: false,
@@ -61,7 +66,7 @@ export default {
     }
   }
 }
-.body {
+.input {
   background-color: #fff;
   border-width: 0;
   border-bottom: 1px solid #e5e5e5;
@@ -78,6 +83,11 @@ export default {
     border: 1px solid #e5e5e5;
     padding: 0 12px;
     border-radius: 2px;
+  }
+
+  &._disabled {
+    color: #b1b1b1;
+    pointer-events: none;
   }
 }
 </style>

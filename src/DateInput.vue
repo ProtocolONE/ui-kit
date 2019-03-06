@@ -1,12 +1,12 @@
 <template>
 <div
-  class="date-input"
   v-clickaway="blur"
+  class="date-input"
 >
   <TextField
-    :hasError="hasError"
+    :has-error="hasError"
     :label="dateLabel"
-    :errorText="typeDateErrorText"
+    :error-text="typeDateErrorText"
     :value="formatDate"
     @input="changeDateByInput"
     @focus="focus"
@@ -15,7 +15,7 @@
     <Datepicker
       :inline="true"
       :language="language"
-      :mondayFirst="mondayFirst"
+      :monday-first="mondayFirst"
       :value="localDate"
       @selected="changeDateByPicker"
     />
@@ -34,10 +34,14 @@ import TextField from './TextField.vue';
 export default {
   directives: { clickaway },
   components: { Datepicker, TextField },
+  model: {
+    prop: 'date',
+    event: 'input',
+  },
   props: {
     date: {
       default: 0,
-      type: [Date, Number],
+      type: [Date, Number, String],
     },
     dateLabel: {
       default: 'Date',
@@ -57,21 +61,12 @@ export default {
       datepickerOpened: false,
       format: 'MMMM d, yyyy',
       hasError: false,
-      localDate: this.date,
+      localDate: this.translateUnixTimeIntoDate(this.date),
     };
-  },
-  watch: {
-    date(value) {
-      this.localDate = value;
-    },
   },
   computed: {
     datepickerClasses() {
-      return [
-        'datepicker',
-        this.datepickerOpened ? '_opened': '',
-        this.hasError ? '_error': '',
-      ];
+      return ['datepicker', this.datepickerOpened ? '_opened' : '', this.hasError ? '_error' : ''];
     },
     formatDate() {
       const locale = locales[this.locale];
@@ -83,6 +78,11 @@ export default {
     },
     mondayFirst() {
       return this.locale !== 'en';
+    },
+  },
+  watch: {
+    date(value) {
+      this.localDate = this.translateUnixTimeIntoDate(value);
     },
   },
   methods: {
@@ -100,8 +100,8 @@ export default {
     changeDateByInput(value) {
       if (value === '') {
         this.hasError = false;
-        this.localDate = localDate;
-        this.$emit('input', 0);
+        this.localDate = null;
+        this.$emit('input', this.localDate);
         return;
       }
 
@@ -116,6 +116,18 @@ export default {
       this.hasError = false;
       this.localDate = localDate;
       this.$emit('input', new Date(localDate.toDateString()).getTime());
+    },
+
+    translateUnixTimeIntoDate(rawTime) {
+      if (!rawTime || typeof rawTime === 'object') {
+        return null;
+      }
+      const timeLength = String(rawTime).length;
+
+      if (timeLength === 10) {
+        return new Date(rawTime * 1000);
+      }
+      return new Date(rawTime);
     },
   },
 };

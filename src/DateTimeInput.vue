@@ -89,9 +89,10 @@ export default {
   },
   methods: {
     dateChange(date) {
-      if (date === 0) {
-        this.date = date;
-        this.$emit('input', 0);
+      if (!date) {
+        this.date = null;
+        this.time = null;
+        this.$emit('input', null);
         return;
       }
 

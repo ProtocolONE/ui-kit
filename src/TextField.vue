@@ -161,10 +161,6 @@ $secondary-input-size: 14px;
   }
 
   &._disabled {
-    &:not(._empty) {
-      border-bottom-color: transparent;
-    }
-    border-bottom-color: transparent;
     color: $secondary-input-color;
     pointer-events: none;
   }

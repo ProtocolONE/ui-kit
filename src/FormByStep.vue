@@ -64,36 +64,31 @@ export default {
 <style lang="scss" scoped>
 .form-by-steps {
   display: flex;
-  direction: row;
+  flex-direction: row;
 }
-
 .controls {
   background: #f6f6f6;
   box-shadow: inset -1px 0px 0px rgba(0, 0, 0, 0.06);
   width: 224px;
+  display: flex;
+  flex-direction: column;
 }
-
 .side-footer {
   padding: 25px 35px;
   color: #b1b1b1;
   font-size: 16px;
   line-height: 20px;
 }
-
 .contents {
   background: #fff;
   padding: 25px 35px;
 }
-
 .steps-list {
   padding: 15px 0;
   margin: 0;
   list-style: none;
+  flex-grow: 1;
 }
-
-.steps-list-item {
-}
-
 .steps-list-link {
   font-size: 16px;
   line-height: 20px;
