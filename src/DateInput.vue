@@ -41,7 +41,7 @@ export default {
   props: {
     date: {
       default: 0,
-      type: [Date, Number],
+      type: [Date, Number, String],
     },
     dateLabel: {
       default: 'Date',
@@ -119,7 +119,7 @@ export default {
     },
 
     translateUnixTimeIntoDate(rawTime) {
-      if (!rawTime || typeof rawTime !== 'number') {
+      if (!rawTime || typeof rawTime === 'object') {
         return rawTime;
       }
       const timeLength = String(rawTime).length;
