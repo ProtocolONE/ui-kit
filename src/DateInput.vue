@@ -120,7 +120,7 @@ export default {
 
     translateUnixTimeIntoDate(rawTime) {
       if (!rawTime || typeof rawTime === 'object') {
-        return rawTime;
+        return null;
       }
       const timeLength = String(rawTime).length;
 
