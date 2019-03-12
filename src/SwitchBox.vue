@@ -19,6 +19,10 @@
 import { includes, uniqueId } from 'lodash-es';
 
 export default {
+  model: {
+    prop: 'checked',
+    event: 'change',
+  },
   props: {
     checked: {
       default: false,
