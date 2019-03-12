@@ -4,11 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.15.0] - 2019-03-12
+- Add simple UiModal
+
 ## [1.14.0] - 2019-03-06
 - DateInput value initialization fixes. Now able to use v-model
 - DateInput now accepts unix time strings
 - Add disabled styles for UiTextarea
-- Fix extra shift for datepicker
 - Fix extra shift to unix time 0 for datepicker
 - Fix FormByStep controls styles
 - Fix disabled state styles for TextField
