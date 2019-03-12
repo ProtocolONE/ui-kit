@@ -20,6 +20,7 @@ import UiTableCell from './src/UiTableCell.vue';
 import UiTableRow from './src/UiTableRow.vue';
 import UiTextarea from './src/UiTextarea.vue';
 import UiRichTextarea from './src/UiRichTextarea.vue';
+import UiPaginator from './src/UiPaginator.vue';
 
 export {
   Button,
@@ -44,4 +45,5 @@ export {
   UiTableRow,
   UiTextarea,
   UiRichTextarea,
+  UiPaginator,
 };
