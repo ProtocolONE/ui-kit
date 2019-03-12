@@ -30,7 +30,7 @@
 </transition>
 </template>
 
-<script type="ts">
+<script>
 export default {
   props: {
     hasCloseButton: {
