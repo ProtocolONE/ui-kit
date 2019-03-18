@@ -105,6 +105,7 @@ $checked-switch-color: #55d287;
   background-color: $switch-color;
   height: 24px;
   width: 44px;
+  margin-bottom: 0;
 
   &._disabled {
     background-color: $disabled-switch-color;
