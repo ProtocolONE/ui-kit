@@ -18,7 +18,7 @@ export default {
       default: 'blue',
       type: String,
       validator(value) {
-        return includes(['blue', 'orange', 'purple', 'green'], value);
+        return includes(['blue', 'orange', 'purple', 'green', 'gray'], value);
       },
     },
     disabled: {
@@ -40,7 +40,7 @@ export default {
       default: 'button',
       type: String,
       validator(value) {
-        return includes(['button', 'submit', 'reset'], value);
+        return includes(['button', 'submit', 'reset', 'rectangle'], value);
       },
     },
   },
@@ -145,6 +145,10 @@ $button-font-style: Loto;
     background-color: $disabled-button-color;
     pointer-events: none;
   }
+
+  &._rectangle {
+    border-radius: 4px;
+  }
 }
 
 .base-button {
@@ -159,6 +163,9 @@ $button-font-style: Loto;
   }
   &._green {
     @include base-button($green-button-color);
+  }
+  &._gray {
+    @include base-button($disabled-button-color);
   }
 }
 </style>
