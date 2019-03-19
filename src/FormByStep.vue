@@ -1,6 +1,6 @@
 <template>
 <div class="form-by-steps">
-  <div class="controls">
+  <div class="form-controls">
     <ul class="steps-list">
       <li
         v-for="item in steps"
@@ -25,7 +25,10 @@
       <slot name="side-footer" />
     </div>
   </div>
-  <div class="contents">
+  <div
+    class="form-contents"
+    :class="{'_has-padding': contentsHasPadding}"
+  >
     <slot />
   </div>
 </div>
@@ -57,6 +60,10 @@ export default {
       required: true,
       type: Array,
     },
+    contentsHasPadding: {
+      type: Boolean,
+      default: true,
+    }
   },
 };
 </script>
@@ -66,7 +73,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.controls {
+.form-controls {
   background: #f6f6f6;
   box-shadow: inset -1px 0px 0px rgba(0, 0, 0, 0.06);
   width: 224px;
@@ -79,9 +86,13 @@ export default {
   font-size: 16px;
   line-height: 20px;
 }
-.contents {
+.form-contents {
   background: #fff;
-  padding: 25px 35px;
+  flex-grow: 1;
+
+  &._has-padding {
+    padding: 25px 35px;
+  }
 }
 .steps-list {
   padding: 15px 0;
