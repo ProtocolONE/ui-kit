@@ -5,7 +5,7 @@
   :class="{
     '_head': isHead,
     '_hoverable': isHoverable,
-    '_clickable': link
+    '_clickable': isClickable || link
   }"
   :to="link && isRouter(link.router) ? url : null"
   :href="link ? url : null"
@@ -24,6 +24,10 @@ export default {
       default: false,
     },
     isHoverable: {
+      type: Boolean,
+      default: true,
+    },
+    isClickable: {
       type: Boolean,
       default: true,
     },
@@ -61,8 +65,8 @@ export default {
   methods: {
     /**
      * Default value for router is true
-     * @param {?Boolean} router
-     * @return {Boolean}
+     * @param {?boolean} router
+     * @return {boolean}
      */
     isRouter(router) {
       return router !== false;
