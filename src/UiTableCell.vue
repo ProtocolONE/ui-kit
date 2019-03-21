@@ -1,10 +1,10 @@
 <template>
 <div
   class="ui-table-cell"
-  :class="{'_head': isHead, ['_' + sortDirection]: isSortAvailable}"
+  :class="{'_head': isHead, '_is-sortable': isSortAvailable, ['_' + sortDirection]: sortDirection}"
 >
   <svg
-    v-if="isSortAvailable"
+    v-if="isSortAvailable && sortDirection"
     class="sort-arrow"
     width="8"
     height="10"
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { includes } from 'lodash-es';
+
 export default {
   name: 'UiTableRow',
 
@@ -26,8 +28,11 @@ export default {
       type: Boolean,
     },
     sortDirection: {
-      default: 'desc',
+      default: null,
       type: String,
+      validator(value) {
+        return includes(['asc', 'desc', null], value);
+      },
     },
   },
   data() {
@@ -61,8 +66,7 @@ export default {
     background: #f6f6f6;
     color: #b1b1b1;
 
-    &._asc,
-    &._desc {
+    &._is-sortable {
       color: #0c2441;
       cursor: pointer;
     }
@@ -76,5 +80,6 @@ export default {
 }
 .sort-arrow {
   fill: #b1b1b1;
+  vertical-align: baseline;
 }
 </style>
