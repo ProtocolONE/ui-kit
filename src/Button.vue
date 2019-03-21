@@ -25,6 +25,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    isTransparent: {
+      default: false,
+      type: Boolean,
+    },
     size: {
       default: 'default',
       type: String,
@@ -57,6 +61,7 @@ export default {
          */
         'base-button',
         this.disabled ? '_disabled' : '',
+        this.isTransparent ? '_transparent' : '',
         ...[this.color, this.size, this.type].map(value => `_${value}`),
       ];
     },
@@ -148,6 +153,12 @@ $button-font-style: Loto;
 
   &._rectangle {
     border-radius: 4px;
+  }
+
+  &._transparent {
+    background-color: transparent;
+    color: $background;
+    box-shadow: inset 0px 0px 0px 2px rgba($background, 0.6);
   }
 }
 
