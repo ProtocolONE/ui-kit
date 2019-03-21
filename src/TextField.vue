@@ -85,9 +85,10 @@ export default {
      * @return {Array<string>}
      */
     inputClasses() {
+      const isEmpty = !this.inputValue && this.inputValue !== 0;
       return [
         'input',
-        !this.inputValue ? '_empty' : '',
+        isEmpty ? '_empty' : '',
         this.isVisibleError ? '_error' : '',
         this.disabled ? '_disabled' : '',
         this.required ? '_required' : '',
@@ -167,7 +168,7 @@ $secondary-input-size: 14px;
 
   &._required ~ .label {
     &:after {
-      content: '*';
+      content: "*";
     }
   }
 }

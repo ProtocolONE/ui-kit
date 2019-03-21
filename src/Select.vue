@@ -12,6 +12,13 @@
     {{ label }}
   </span>
   <span
+    v-if="isVisibleError"
+    class="error"
+    :title="errorText"
+  >
+    {{ errorText }}
+  </span>
+  <span
     v-if="additionalInfo"
     class="additional"
     :title="additionalInfo"
@@ -25,8 +32,8 @@
     <div class="options">
       <label
         v-for="option in optionsView"
-        class="option"
         :key="option.value"
+        class="option"
         :class="{
           '_empty': option.value === '',
           '_current': selectValue === option.value
@@ -102,6 +109,14 @@ export default {
       default: 'Not selected',
       type: String,
     },
+    errorText: {
+      default: '',
+      type: String,
+    },
+    hasError: {
+      default: false,
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -117,6 +132,7 @@ export default {
     selectClasses() {
       return [
         'select-field',
+        this.isVisibleError ? '_error' : '',
         this.focused ? '_focused' : '',
         this.selectValue === '' ? '_empty' : '',
         this.disabled ? '_disabled' : '',
@@ -140,6 +156,14 @@ export default {
       }
 
       return this.options;
+    },
+
+    /**
+     * Error is visible if it exists and error text isn't empty
+     * @return {boolean}
+     */
+    isVisibleError() {
+      return !!(this.hasError && this.errorText);
     },
   },
   watch: {
@@ -168,6 +192,7 @@ $input-background-color: #fff;
 $primary-input-color: #333;
 $secondary-input-color: #b1b1b1;
 $focus-input-color: #3787ff;
+$error-input-color: #ff6f6f;
 $hover-option-color: #deebfa;
 
 $primary-input-size: 16px;
@@ -186,7 +211,7 @@ $secondary-input-size: 14px;
   width: 100%;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: 40px;
@@ -235,6 +260,12 @@ $secondary-input-size: 14px;
 
     & > .box {
       transform: scaleY(1);
+    }
+  }
+
+  &._error {
+    & > .label {
+      border-color: $error-input-color;
     }
   }
 
@@ -337,7 +368,7 @@ input {
 
   &._required {
     &:after {
-      content: '*';
+      content: "*";
       color: #f00;
     }
   }
@@ -347,5 +378,12 @@ input {
   max-width: 50%;
   right: 0;
   top: 0;
+}
+.error {
+  bottom: 0;
+  color: $error-input-color;
+  display: block;
+  font-size: $secondary-input-size;
+  position: absolute;
 }
 </style>
