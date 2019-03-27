@@ -60,7 +60,7 @@ export default {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   border-radius: 4px;
-  padding: 16px;
+  padding: 32px;
 }
 .header {
   align-items: center;
