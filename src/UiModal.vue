@@ -2,7 +2,7 @@
 <transition name="modal">
   <div
     class="overlay"
-    @click="$emit('close')"
+    @click.self="$emit('close')"
   >
     <div class="content">
       <div class="header">
