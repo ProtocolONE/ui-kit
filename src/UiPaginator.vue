@@ -1,5 +1,8 @@
 <template>
 <div class="ui-paginator">
+  <div class="left">
+    <slot name="left" />
+  </div>
   <div class="pages">
     <button
       v-if="pagesCount > 1"
@@ -151,15 +154,21 @@ export default {
 <style lang="scss" scoped>
 .ui-paginator {
   background: #f6f6f6;
-  padding-right: 20px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
 }
-
+.left {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
 .pages {
   height: 100%;
   display: flex;
   justify-content: flex-end;
+  flex-grow: 1;
 }
-
 .pages-item {
   height: 40px;
   width: 40px;
