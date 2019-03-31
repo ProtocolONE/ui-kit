@@ -17,6 +17,9 @@
     @input="$emit('input', $event.target.value)"
     v-text="value"
   />
+  <div :class="['input', '_printed', { '_bordered': isBordered, '_disabled': disabled, '_error': isVisibleError }]">
+    {{ value }}
+  </div>
 </div>
 </template>
 
@@ -121,6 +124,18 @@ $error-input-color: #ff6f6f;
 
   &._error {
     border-bottom-color: $error-input-color;
+  }
+
+  &._printed {
+    display: none;
+  }
+
+  @media print {
+    display: none;
+
+    &._printed {
+      display: block;
+    }
   }
 }
 .error {
