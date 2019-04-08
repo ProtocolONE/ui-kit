@@ -81,7 +81,7 @@ export default {
   flex-direction: column;
 }
 .side-footer {
-  padding: 25px 35px;
+  padding: 24px 32px;
   color: #b1b1b1;
   font-size: 16px;
   line-height: 20px;
