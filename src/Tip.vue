@@ -24,6 +24,13 @@ export default {
         return includes(['white'], value);
       },
     },
+    position: {
+      default: 'right',
+      type: String,
+      validator(value) {
+        return includes(['left', 'right'], value);
+      },
+    },
     visible: {
       default: false,
       type: Boolean,
@@ -38,6 +45,7 @@ export default {
       return [
         'simple-tip',
         `_${this.color}`,
+        `_${this.position}`,
         this.visible ? '_show' : '',
         this.withoutPadding ? '_without-padding' : '',
       ];
@@ -47,10 +55,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@mixin simple-tip($background: #fff) {
-  right: 0;
+$colors: white;
+$positions: left, right;
+
+@mixin simple-tip($background: white, $position: right) {
   top: 50%;
-  transform: translate(calc(100% + 16px), -50%);
   position: absolute;
   border-radius: 2px;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
@@ -60,35 +69,54 @@ export default {
   opacity: 0;
   transition: opacity 0.2s ease-out;
 
+  @if $position == right {
+    right: 0;
+    left: auto;
+    transform: translate(calc(100% + 16px), -50%);
+  } @else if $position == left {
+    left: 0;
+    right: auto;
+    transform: translate(calc(-100% - 16px), -50%);
+  }
+
   &:before {
     position: absolute;
     content: '\25C0';
-    left: -10px;
     top: calc(50% - 8px);
     text-shadow: -4px 0px 4px rgba(0, 0, 0, 0.05);
     z-index: -1;
-    transform: scaleY(1.6);
     font-size: 12px;
     color: $background;
+
+    @if $position == right {
+      left: -10px;
+      transform: scaleY(1.6);
+    } @else if $position == left {
+      right: -10px;
+      transform: scaleY(1.6) rotate(180deg);
+    }
   }
 
   &._without-padding {
     padding: 0;
   }
-}
 
-.simple-tip {
-  @include simple-tip();
-
-  &._white {
-    @include simple-tip($background: #fff);
-  }
   &._show {
     opacity: 1;
     pointer-events: initial;
   }
 }
+.simple-tip {
+  @include simple-tip();
 
+  @each $color in $colors {
+    @each $position in $positions {
+      &._#{$color}._#{$position} {
+        @include simple-tip($background: $color, $position: $position);
+      }
+    }
+  }
+}
 .header,
 .main,
 .footer {
