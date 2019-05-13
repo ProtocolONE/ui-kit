@@ -12,13 +12,16 @@
     v-clickaway="blur"
     :class="['field', fieldFocused ? '_focused' : '']"
   >
-    <TextField
-      v-model="textFieldValue"
-      :label="label"
-      @input="search"
-      @focus="focus"
-      @blur="textFieldValue = ''"
-    />
+    <div class="field-input">
+      <TextField
+        v-model="textFieldValue"
+        :label="label"
+        @input="search"
+        @focus="focus"
+        @blur="textFieldValue = ''"
+      />
+    </div>
+
     <TagList
       class="list-tag"
       :tags="unselectedTags"
@@ -150,6 +153,23 @@ export default {
   &._focused {
     & > .list-tag {
       transform: scaleY(1);
+    }
+  }
+}
+
+.field-input {
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 40px;
+    border: 4px solid transparent;
+    border-top: 4px solid #b1b1b1;
+
+    .field._focused & {
+      border-top-color: #3787ff;
     }
   }
 }
