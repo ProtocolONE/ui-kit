@@ -13,9 +13,11 @@
     :class="['field', fieldFocused ? '_focused' : '']"
   >
     <TextField
+      v-model="textFieldValue"
       :label="label"
       @input="search"
       @focus="focus"
+      @blur="textFieldValue = ''"
     />
     <TagList
       class="list-tag"
@@ -77,6 +79,7 @@ export default {
       localTags: this.tags,
       localSelectedTags: this.selectedTags,
       fieldFocused: false,
+      textFieldValue: '',
     };
   },
   computed: {
