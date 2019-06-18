@@ -2,7 +2,7 @@
 <div class="text-field">
   <input
     v-model="inputValue"
-    v-bind="{ type, required, disabled }"
+    v-bind="{ type, required, disabled, min, max }"
     :class="inputClasses"
     @blur="$emit('blur')"
     @focus="$emit('focus')"
@@ -61,6 +61,14 @@ export default {
     type: {
       default: 'text',
       type: String,
+    },
+    min: {
+      default: '',
+      type: [String, Number],
+    },
+    max: {
+      default: '',
+      type: [String, Number],
     },
     value: {
       default: '',
