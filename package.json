@@ -7,8 +7,10 @@
   "dependencies": {
     "date-fns": "^v2.0.0-alpha.27",
     "lodash-es": "^4.17.11",
+    "perfect-scrollbar": "^1.4.0",
     "vue": "^2.5.21",
     "vue-clickaway": "^2.2.2",
+    "vue-perfect-scrollbar": "^0.1.0",
     "vue-wysiwyg": "^1.7.2",
     "vuejs-datepicker": "^1.5.4"
   },
