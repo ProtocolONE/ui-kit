@@ -210,7 +210,7 @@ $secondary-input-size: 14px;
   top: 0;
 }
 .error {
-  bottom: 0;
+  top: calc(100% - 20px);
   color: $error-input-color;
   display: block;
   font-size: $secondary-input-size;
