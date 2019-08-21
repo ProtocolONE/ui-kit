@@ -19,22 +19,27 @@
 
 <template>
 <div class="page-navbar">
-  <component
-    :is="logoLinkTagName"
-    class="logo"
-    :to="logoLink && isRouter(logoLink.router) ? url : null"
-    :href="logoLink ? url : null"
-  >
-    <span class="logo-icon">
-      <slot name="logo" />
-    </span>
-    <span class="logo-title">
-      {{ title }}
-      <slot name="title" />
-    </span>
-  </component>
 
-  <div class="navgition-links">
+  <div class="top">
+    <component
+      :is="logoLinkTagName"
+      class="logo"
+      :to="logoLink && isRouter(logoLink.router) ? url : null"
+      :href="logoLink ? url : null"
+    >
+      <span class="logo-icon">
+        <slot name="logo" />
+      </span>
+      <span class="logo-title">
+        {{ title }}
+        <slot name="title" />
+      </span>
+    </component>
+  </div>
+
+  <VuePerfectScrollbar
+    class="navgition-links"
+    :settings="{suppressScrollX: true}">
     <component
       v-for="(link, index) in navigationLinks"
       :is="isRouter(link.router) ? routerComponentName : 'a'"
@@ -46,7 +51,7 @@
       <span class="navgition-link-icon" />
       <span v-text="link.label" />
     </component>
-  </div>
+  </VuePerfectScrollbar>
 
   <div class="bottom">
     <slot name="bottom" />
@@ -103,11 +108,13 @@
 </template>
 
 <script>
+import VuePerfectScrollbar from 'vue-perfect-scrollbar';
 import IconAuth from './IconAuth.vue';
 
 export default {
   components: {
     IconAuth,
+    VuePerfectScrollbar,
   },
   props: {
     /**
@@ -182,6 +189,12 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.ps__scrollbar-y-rail {
+  background: none !important;
+}
+</style>
+
 <style scoped lang="scss">
 $navbar-color: #203d5f;
 $hover-navbar-item-color: #2f6ecd;
@@ -198,6 +211,9 @@ $hover-font-color: #fff;
   transition: width 0.2s ease-out 0.1s;
   color: $font-color;
   z-index: 10;
+
+  display: flex;
+  flex-direction: column;
 
   &:before {
     content: '';
@@ -264,9 +280,8 @@ $hover-font-color: #fff;
 }
 
 .navgition-links {
-  width: 100%;
+  height: 100%;
   white-space: nowrap;
-  overflow: hidden;
 }
 .navgition-link {
   padding: 16px;
@@ -306,11 +321,8 @@ $hover-font-color: #fff;
 }
 
 .bottom {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   white-space: nowrap;
-  overflow: hidden;
 }
 
 .user {
